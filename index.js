@@ -8,7 +8,7 @@
 //     movie.appendChild(movieTitle)
 //     document.querySelector('ul').appendChild(movie);
 //     inputField.value = "";
-    
+
 
 
 // }
@@ -23,9 +23,9 @@ function addMovie(event) {
     let movie = document.createElement("li")
     let movieTitle = document.createElement('span');
     movieTitle.textContent = inputField.value;
-    
+
     movieTitle.addEventListener('click', crossOffMovie);
-    
+
     movie.appendChild(movieTitle)
     let deleteBtn = document.createElement('button')
     deleteBtn.textContent = 'x'
@@ -37,19 +37,29 @@ function addMovie(event) {
 
 }
 
-function deleteMovie (event){
+function deleteMovie(event) {
     event.target.parentNode.remove()
-    message.textContent = "Movie deleted";
+    message.textContent = `${event.target.parentElement.childNodes[0].textContent} deleted!`
+    revealMessage()
 
 }
 
 document.querySelector("form").addEventListener('submit', addMovie);
 
-function crossOffMovie(event){
+function crossOffMovie(event) {
     event.target.classList.toggle('checked')
-    if(event.target.classList.contains('checked')){
-        message.textContent = "Movie Watched!"
+    if (event.target.classList.contains('checked')) {
+        message.textContent = `${event.target.textContent} watched!`
     } else {
         message.textContent = "Movie added back!"
     }
+    revealMessage()
+}
+
+function revealMessage() {
+    message.classList.remove('hide')
+    setTimeout(() => {
+        message.classList.add('hide')
+    }, '1000');
+
 }
